@@ -3,7 +3,6 @@ import ContactForm from "./ContactForm/ContactForm";
 import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
 import { useSelector, useDispatch } from 'react-redux';
-// import { addContact, removeContact } from 'redux/contacts/contacts-slice';
 import { fetchContacts, addContact, removeContact } from "redux/contacts/contacts-operation";
 import { setFilter } from 'redux/filter/filter-slice';
 import { getContacts } from 'redux/contacts/contacts-selector';
@@ -34,11 +33,6 @@ export default function Phonebook() {
         const { value } = e.target;
         dispatch(setFilter(value))
     };
-
-    const isDuplicate = ({name}) => {
-        const result = contacts.find((item) => item.name.toLocaleLowerCase() === name.toLocaleLowerCase())
-        return result
-    }
 
     const getFiltereContacts = () => {
         if (!filter) {

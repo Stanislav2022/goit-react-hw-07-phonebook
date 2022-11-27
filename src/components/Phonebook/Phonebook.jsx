@@ -18,7 +18,7 @@ export default function Phonebook() {
     useEffect(() => {
         dispatch(fetchContacts())
     },[dispatch])
-
+fetchContacts();
     const onAddContacts = (data) => {
         const action = addContact(data);
         dispatch(action);
@@ -49,6 +49,7 @@ export default function Phonebook() {
     }
 
     const filterContacts = getFiltereContacts();
+
 
     return (
         <>

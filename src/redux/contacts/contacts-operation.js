@@ -7,6 +7,7 @@ const isDuplicate = ({ name }, contacts) => {
   );
   return result;
 };
+
 export const fetchContacts = createAsyncThunk(
   'contacts/fetch',
   async (_, thunkApi) => {

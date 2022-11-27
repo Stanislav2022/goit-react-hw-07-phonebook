@@ -1,10 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://63817c5c9842ca8d3c940bef.mockapi.io/contacts',
-  params: {
-    _limit: 10,
-  },
+  baseURL: 'https://6383c3296e6c83b7a99afa3c.mockapi.io/contacts',
 });
 
 export const getContact = async () => {

@@ -3,12 +3,12 @@ import ContactForm from "./ContactForm/ContactForm";
 import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact, removeContact } from 'redux/contacts/contacts-slice';
+// import { addContact, removeContact } from 'redux/contacts/contacts-slice';
+import { fetchContacts, addContact, removeContact } from "redux/contacts/contacts-operation";
 import { setFilter } from 'redux/filter/filter-slice';
 import { getContacts } from 'redux/contacts/contacts-selector';
 import { getFilter } from 'redux/filter/filter-selector';
-
-
+import { useEffect } from "react";
 
 
 export default function Phonebook() {
@@ -16,10 +16,11 @@ export default function Phonebook() {
     const filter = useSelector(getFilter);
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch(fetchContacts())
+    },[dispatch])
+
     const onAddContacts = (data) => {
-          if (isDuplicate(data)) {
-            return alert(`${data.name} - is already in contacts`)
-        }
         const action = addContact(data);
         dispatch(action);
     };

@@ -6,14 +6,14 @@ import { useState } from 'react'
 
 const initialState = {
     name: '',
-    number: '',
+    phone: '',
 }
 
 export default function ContactForm({ onSubmit }) {
     const [state, setState] = useState(initialState);
 
     const nameId = nanoid();
-    const numberId = nanoid();
+    const phoneId = nanoid();
 
     const handlePhonebook = (e) => {
         const { name, value } = e.target
@@ -29,8 +29,8 @@ export default function ContactForm({ onSubmit }) {
 
     const handleSubmite = (e) => {
         e.preventDefault()
-        const { name, number } = state;
-        onSubmit({ name, number });
+        const { name, phone } = state;
+        onSubmit({ name, phone });
         setState(initialState);
     };    
     
@@ -50,13 +50,13 @@ export default function ContactForm({ onSubmit }) {
                     required onChange={handlePhonebook} />
             </div>
             <div>
-                <label htmlFor={numberId} > Number </label>
+                <label htmlFor={phoneId} > Number </label>
                 <input
                     className={css.input}
-                    id={numberId}
+                    id={phoneId}
                     type="tel"
-                    name="number"
-                    value={state.number}
+                    name="phone"
+                    value={state.phone}
                     pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                     title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                     required onChange={handlePhonebook} />

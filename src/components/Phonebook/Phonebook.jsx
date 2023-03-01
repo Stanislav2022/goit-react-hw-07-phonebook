@@ -1,4 +1,5 @@
 import css from "./Phonebook.module.css";
+
 import ContactForm from "./ContactForm/ContactForm";
 import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
@@ -17,8 +18,10 @@ export default function Phonebook() {
 
     useEffect(() => {
         dispatch(fetchContacts())
-    },[dispatch])
-fetchContacts();
+    }, [dispatch]);
+
+    fetchContacts();
+
     const onAddContacts = (data) => {
         const action = addContact(data);
         dispatch(action);

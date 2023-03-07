@@ -32,7 +32,6 @@ const dispatch = useDispatch()
                 <div>
                 <label htmlFor={nameId}> Name </label>
                 <input
-                    // className={css.input}
                     id={nameId}
                     type="text"
                     name="name"
@@ -43,7 +42,6 @@ const dispatch = useDispatch()
                 <div>
                     <label htmlFor={phoneId} > Number </label>
                     <input
-                        // className={css.input}
                         id={phoneId}
                         type="tel"
                         name="phone"

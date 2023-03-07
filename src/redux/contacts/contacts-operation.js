@@ -6,18 +6,17 @@ const isDuplicate = ({ name }, contacts) => {
   const result = contacts.items.find(item => {
     return NormalizedName === item.name.toLowerCase();
   });
-
-  return result;
+  return Boolean(result);
 };
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetch',
   async (_, thunkApi) => {
     try {
-      const data = await api.getContact();
+      const data = await api.fetchContacts();
       return data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error);
+      return thunkApi.rejectWithValue(error.message);
     }
   }
 );
@@ -32,21 +31,23 @@ export const addContact = createAsyncThunk(
       return rejectWithValue(error);
     }
   },
+
   {
     condition: (data, { getState }) => {
       const { contacts } = getState();
       if (isDuplicate(data, contacts)) {
-        return alert(`${data.name} - is already in contacts`);
+        alert(`${data.name} - is already in contacts`);
+        return false;
       }
     },
   }
 );
 
-export const removeContact = createAsyncThunk(
+export const deleteContact = createAsyncThunk(
   'contacts/remove',
   async (id, { rejectWithValue }) => {
     try {
-      await api.removeContact(id);
+      await api.deleteContact(id);
       return id;
     } catch (error) {
       return rejectWithValue(id);

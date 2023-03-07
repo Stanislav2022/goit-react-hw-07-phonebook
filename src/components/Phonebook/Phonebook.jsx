@@ -1,20 +1,20 @@
-import css from "./Phonebook.module.css";
-
-import ContactForm from "./ContactForm/ContactForm";
-import ContactList from './ContactList/ContactList';
-import Filter from './Filter/Filter';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchContacts, addContact, removeContact } from "redux/contacts/contacts-operation";
-import { setFilter } from 'redux/filter/filter-slice';
-import { getContacts } from 'redux/contacts/contacts-selector';
-import { getFilter } from 'redux/filter/filter-selector';
+import { fetchContacts, addContact, deleteContact } from "redux/contacts/contacts-operation";
 import { useEffect } from "react";
+import css from "./Phonebook.module.css";
+import {ContactForm} from "./ContactForm/ContactForm";
+import ContactList from './ContactList/ContactList';
+import {Filter} from './Filter/Filter';
+import { getContacts} from 'redux/contacts/contacts-selector';
+import { getFilter } from 'redux/filter/filter-selector';
+import { setFilter } from 'redux/filter/filter-slice';
 
 
-export default function Phonebook() {
+export const Phonebook = () => {
     const contacts = useSelector(getContacts);
     const filter = useSelector(getFilter);
     const dispatch = useDispatch();
+
 
     useEffect(() => {
         dispatch(fetchContacts())
@@ -28,7 +28,7 @@ export default function Phonebook() {
     };
 
     const onRemoveContact = (id) => {
-        const action = removeContact(id);
+        const action = deleteContact(id);
         dispatch(action);
     }
 
@@ -41,13 +41,13 @@ export default function Phonebook() {
         if (!filter) {
             return contacts;
         }
-        const normalizedFilter = filter.toLocaleLowerCase();
-        const filteredContacts = contacts.filter(({ name, number }) => {
+       const normalizedFilter = filter.toLocaleLowerCase();       
+       const filteredContacts = contacts.filter(({ name, phone }) => {
             const normalizedName = name.toLocaleLowerCase();
-            const normalizedNumber = number.toLocaleLowerCase();
+            const normalizedNumber = phone.toLocaleLowerCase();
             const result = normalizedName.includes(normalizedFilter) || normalizedNumber.includes(normalizedFilter);
             return result;
-        })
+        })   
         return filteredContacts;
     }
 
@@ -57,12 +57,9 @@ export default function Phonebook() {
     return (
         <>
             <div className={css.form}>
-                <h1>Phonebook</h1>
+                <h1 className={css.header}>Phonebook</h1>
                 <ContactForm onSubmit={onAddContacts} />
-            </div>
-            <div className={css.form}>
-                <h2>Contacts</h2>
-                <Filter filter={ filter} handleChange={handleChange}  />
+                <Filter filter={filter} handleChange={handleChange} />
                 <ContactList items={filterContacts} removeContact={onRemoveContact} />
             </div>
        </>

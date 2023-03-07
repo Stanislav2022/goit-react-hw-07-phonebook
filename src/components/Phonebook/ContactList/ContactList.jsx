@@ -1,12 +1,19 @@
 import css from "../Phonebook.module.css"
 import PropTypes from 'prop-types'
+import { AiFillDelete, AiOutlineContacts } from "react-icons/ai";;
 
 export default function ContactList({ items, removeContact }) {
     const element = items.map(({name, phone, id}) => {
-        return <li key={id}>{name}: {phone} <span className={css.remove} onClick={() => removeContact(id)}>Delete</span></li>
+      return <li className={css.contacts__list} key={id}>{name}: {phone}
+               
+                <span className={css.remove} onClick={() => removeContact(id)}><AiFillDelete /></span>
+              </li>
     })
   return (
-    <ul>{element}</ul>
+    <>
+      <h2 className={css.header}>Contacts list <AiOutlineContacts/></h2>
+      <ul>{element}</ul>
+    </>
   )
 }
 

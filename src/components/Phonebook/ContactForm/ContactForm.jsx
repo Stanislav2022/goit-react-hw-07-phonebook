@@ -1,7 +1,6 @@
 import React from 'react'
 import css from "../Phonebook.module.css"
 import { nanoid } from 'nanoid'
-import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { addContact } from 'redux/contacts/contacts-operation'
 import { AiOutlineUserAdd } from "react-icons/ai";;
@@ -60,8 +59,4 @@ const dispatch = useDispatch()
 }
 
 
-
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
 
